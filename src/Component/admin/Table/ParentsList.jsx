@@ -1,3 +1,4 @@
+import { getRole } from '@/utils/constant';
 import { Avatar, Table } from 'antd';
 import { useRouter } from 'next/router';
 
@@ -37,8 +38,8 @@ const columns = [
     },
     {
         title: 'Total Schools',
-        dataIndex: 'assigned_students',
-        sorter: (a, b) => a.total_students - b.total_students,
+        dataIndex: 'assigned_schools',
+        sorter: (a, b) => a.total_schools - b.total_schools,
         sortDirections: ['descend', 'ascend'],
     },
     {
@@ -68,7 +69,7 @@ const ParentsList = ({ data }) => {
     const onRow = (record) => {
         return {
             onClick: () => {
-                router.push(`/dashboard/admin/parent-profile/${record.user.id}`);
+                router.push(`/dashboard/${getRole() === 'Admin' ? 'admin' : 'school'}/parent-profile/${record.user.id}`);
             },
         };
     };

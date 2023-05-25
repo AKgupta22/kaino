@@ -23,6 +23,7 @@ const AdministratorsTable = ({ data }) => {
 
     useEffect(() => {
         if (deleteUserState.isSuccess) {
+            toast.dismiss()
             toast.success('User disabled successfully')
             dispatch(deleteUserReset())
             setDelId('')

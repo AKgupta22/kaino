@@ -2,9 +2,9 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import InvoicePreviewTable from '../Table/InvoicePreviewTable'
 
-const InvoiceView = () => {
+const InvoiceView = ({ data }) => {
     return (
-        <Box sx={{ padding: 4 }}>
+        <Box sx={{ padding: 4 }} id="invoice_container">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box>
                     <Typography variant='body1'
@@ -18,7 +18,7 @@ const InvoiceView = () => {
                     </Typography>
 
                     <Typography variant='body1' sx={{ marginTop: 1, fontSize: '1.4rem', fontWeight: '500' }}>
-                        Invoice Number : IN356545484448
+                        Invoice Number : {data?.invoice_number}
                     </Typography>
                 </Box>
                 <Box>
@@ -28,15 +28,15 @@ const InvoiceView = () => {
                     <Typography variant='body1' sx={{ marginTop: 2, fontSize: '1.2rem', fontWeight: '600' }}>
                         Kaino Africa
                     </Typography>
-                    <Typography variant='body1' sx={{ fontSize: '1rem' }}>
+                    {/* <Typography variant='body1' sx={{ fontSize: '1rem' }}>
                         +22736473877
+                    </Typography> */}
+                    <Typography variant='body1' sx={{ fontSize: '1rem', maxWidth: '220px' }}>
+                        {data?.invoice_from}
                     </Typography>
-                    <Typography variant='body1' sx={{ fontSize: '1rem' }}>
-                        Address line 1, Address line 2
-                    </Typography>
-                    <Typography variant='body1' sx={{ fontSize: '1rem' }}>
+                    {/* <Typography variant='body1' sx={{ fontSize: '1rem' }}>
                         zip code ,City - Country
-                    </Typography>
+                    </Typography> */}
                 </Box>
             </Box>
             <hr style={{ height: '1px' }} />
@@ -46,20 +46,21 @@ const InvoiceView = () => {
                         Billed to
                     </Typography>
                     <Typography variant='body1' sx={{ marginTop: 2, fontSize: '1.2rem', fontWeight: '600' }}>
-                        St. Patrick Kindergaten Kisumu
+                        {data?.organization_name}
                     </Typography>
                     <Typography variant='body1' sx={{ marginTop: 2, fontSize: '1rem' }}>
                         +22736473877
                     </Typography>
-                    <Typography variant='body1' sx={{ fontSize: '1rem' }}>
-                        Address line 1
-                    </Typography>
-                    <Typography variant='body1' sx={{ fontSize: '1rem' }}>
+                    {data?.invoice_to && <Typography variant='body1' sx={{ fontSize: '1rem', maxWidth: '220px' }}>
+                        {data?.invoice_to}
+                    </Typography>}
+
+                    {/* <Typography variant='body1' sx={{ fontSize: '1rem' }}>
                         Address line 2
                     </Typography>
                     <Typography variant='body1' sx={{ fontSize: '1rem' }}>
                         zip code ,City - Country
-                    </Typography>
+                    </Typography> */}
                 </Box>
                 <Box sx={{ paddingRight: 4 }}>
                     <Typography variant='h5' sx={{ fontSize: '1.5rem', fontWeight: '700' }}>
@@ -79,7 +80,7 @@ const InvoiceView = () => {
                             Recurring : 15 Months
                         </Typography>
                         <Typography variant='body1' sx={{ fontSize: '1rem', marginTop: 1 }}>
-                            PO Number : 54515454
+                            PO Number : {data?.po_number}
                         </Typography>
                     </Box>
                 </Box>
@@ -96,17 +97,17 @@ const InvoiceView = () => {
                     alignItems: 'center'
                 }}>
                 <Typography variant='body1' sx={{ fontWeight: '600' }}>
-                    Issue Date: 27 Jan 2023
+                    Issue Date: {data?.created_date}
                 </Typography>
                 <Typography variant='body1' sx={{ fontWeight: '600' }}>
-                    Due Date: 27 Aug 2023
+                    Due Date: {data?.due_date}
                 </Typography>
                 <Typography variant='body1' sx={{ fontWeight: '600' }}>
-                    Due Amount : UGX1,54,22
+                    Due Amount : ${data?.status !== 'Paid' ? data?.total_amount : 0}
                 </Typography>
             </Box>
             <Box sx={{ marginTop: 3 }}>
-                <InvoicePreviewTable data={[]} />
+                <InvoicePreviewTable data={data?.items} />
             </Box>
             <Box sx={{ marginTop: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box>
@@ -141,7 +142,7 @@ const InvoiceView = () => {
                             Taxable
                         </Typography>
                         <Typography variant='body1'>
-                            UGX 6,660.00
+                            $ {data?.total_amount}
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -149,7 +150,7 @@ const InvoiceView = () => {
                             Additional Charges
                         </Typography>
                         <Typography variant='body1'>
-                            UGX 6,660.00
+                            $ 0
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -157,7 +158,7 @@ const InvoiceView = () => {
                             Discount
                         </Typography>
                         <Typography variant='body1'>
-                            UGX 3,060.00
+                            $0
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -165,7 +166,7 @@ const InvoiceView = () => {
                             Sub total
                         </Typography>
                         <Typography variant='body1'>
-                            UGX 5,660.00
+                            ${data?.total_amount}
                         </Typography>
                     </Box>
                     <hr style={{ height: '1px' }} />
@@ -174,16 +175,19 @@ const InvoiceView = () => {
                             Total
                         </Typography>
                         <Typography variant='h5' sx={{ fontWeight: '700' }}>
-                            UGX 6,660.00
+                            $ {data?.total_amount}
                         </Typography>
                     </Box>
                 </Box>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 4 }}>
                 <Box>
-                    <img src="https://www.kindpng.com/picc/m/332-3322416_fake-signature-png-transparent-png.png" alt="signature" height={'80px'} width={'300px'} />
+                    {
+                        data?.sign_img && <img src={data?.sign_img} alt="signature" height={'80px'} width={'300px'} />
+                    }
+
                     <Typography variant='body1' sx={{ marginTop: 2 }}>
-                        Jane P Namugga, Finance Admin
+                        {data?.name_of_signee}
                     </Typography>
                 </Box>
             </Box>

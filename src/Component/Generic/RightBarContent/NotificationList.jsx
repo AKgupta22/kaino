@@ -14,6 +14,7 @@ export default function NotificationList({ data, isUnread, setIsUnread }) {
     const clearNotificationState = useSelector(state => state.clearNotification)
     useEffect(() => {
         if (clearNotificationState.isSuccess) {
+            toast.dismiss()
             toast.success('Cleared')
             dispatch(clearNotificationReset())
             setIsUnread(false)
@@ -46,6 +47,7 @@ export default function NotificationList({ data, isUnread, setIsUnread }) {
                             {
                                 isUnread && <p style={{ color: '#62C8FB', cursor: 'pointer' }} onClick={() => {
                                     dispatch(clearNotificationRequest())
+                                    toast.dismiss()
                                     toast.warn('Please wait..')
                                 }}>Clear All</p>
                             }

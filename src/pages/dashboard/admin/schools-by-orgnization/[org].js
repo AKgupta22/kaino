@@ -1,27 +1,19 @@
-import { Layout } from 'antd';
-import React, { useState } from 'react';
-import AdminLeftNav from '@/Component/Generic/LeftNavbar/AdminLeftNav';
-import AdminHeader from '@/Component/Generic/Header/AdminHeader';
-import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
-import AdminSchoolByOrgContent from '@/Component/admin/RightNavContent/AdminSchoolByOrgContent';
+import React, { useEffect } from 'react';
+import AdminSchoolByOrgContent from '@/Component/admin/RightNavContent/schools/AdminSchoolByOrgContent';
 import { useRouter } from 'next/router';
+import { dispatch } from '@/redux/store';
+import { setHeader } from '@/redux/slices/HeaderTitle';
 
 const SchoolByOrg = () => {
-
-    const [collapsed, setCollapsed] = useState(false);
     const router = useRouter()
     const { org } = router.query
 
+    useEffect(() => {
+        dispatch(setHeader('Schools'))
+    }, [])
+
     return (
-        <Layout style={{ minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
-            <AdminLeftNav collapsed={collapsed} />
-            <Layout className="site-layout" style={{ maxHeight: "100vh", overflow: 'scroll', overflowX: "hidden" }}>
-                <AdminHeader collapsed={collapsed} setCollapsed={setCollapsed} headerText='Total Schools' />
-                <RightContentWrapper padding='12px'>
-                    <AdminSchoolByOrgContent org={org} />
-                </RightContentWrapper>
-            </Layout>
-        </Layout>
+        <AdminSchoolByOrgContent org={org} />
     );
 };
 export default SchoolByOrg;

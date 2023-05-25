@@ -39,8 +39,23 @@ export const rolesAccess = [
         access: 'Full'
     },
     {
+        id: 2,
+        name: "Teacher",
+        access: 'Limited'
+    },
+    {
+        id: 3,
+        name: "Parent",
+        access: 'Read-only'
+    },
+    {
+        id: 4,
+        name: "Student",
+        access: 'Limited'
+    },
+    {
         id: 5,
-        name: "Head of Curicullum",
+        name: "Head of Curriculum",
         access: 'Lessons'
     },
     {
@@ -52,8 +67,14 @@ export const rolesAccess = [
         id: 7,
         name: "Finance",
         access: 'Finance Dashboard'
+    },
+    {
+        id: 8,
+        name: "School Admin",
+        access: 'Full'
     }
-]
+];
+
 
 export const arrayObjectFlat = (arr) => {
     const transformedArray = []
@@ -66,10 +87,20 @@ export const arrayObjectFlat = (arr) => {
 
 import { saveAs } from 'file-saver';
 import json2csv from 'json2csv';
+import jwtDecode from 'jwt-decode';
 
 export function convertToCSV(data) {
-  const csv = json2csv.parse(data);
-  const fileName = 'data.csv';
-  const file = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  saveAs(file, fileName);
+    const csv = json2csv.parse(data);
+    const fileName = 'data.csv';
+    const file = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    saveAs(file, fileName);
+}
+
+export const getRole = (id) => {
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecode(token)
+    let roleId = id ? id : decoded?.role
+    const roleDetails = rolesAccess.find(item => item.id == roleId)
+    const name = roleDetails?.name
+    return name
 }

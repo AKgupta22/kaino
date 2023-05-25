@@ -12,7 +12,7 @@ const InvoicePreviewTable = ({ data }) => {
         },
         {
             title: 'Category',
-            dataIndex: 'category'
+            dataIndex: 'plan'
         },
 
         {
@@ -21,7 +21,7 @@ const InvoicePreviewTable = ({ data }) => {
         },
         {
             title: 'Quantity',
-            dataIndex: 'qty'
+            dataIndex: 'quantity'
         },
         {
             title: 'Discount',

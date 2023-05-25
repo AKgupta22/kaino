@@ -1,5 +1,5 @@
 import { Table } from 'antd';
-import { Button } from '@mui/material';
+import moment from 'moment';
 
 const columns = [
     {
@@ -15,13 +15,13 @@ const columns = [
 
     {
         title: 'Date/Time',
-        dataIndex: 'date',
+        render: (item) => (
+            <p>{moment(item?.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
+        )
     },
     {
         title: 'Action',
-        render: () => (
-            <Button variant='contained' size='medium'>Action</Button>
-        )
+        dataIndex: 'action'
     },
 ];
 

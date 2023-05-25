@@ -1,27 +1,19 @@
-import { Layout } from 'antd';
-import React, { useState } from 'react';
-import AdminLeftNav from '@/Component/Generic/LeftNavbar/AdminLeftNav';
-import AdminHeader from '@/Component/Generic/Header/AdminHeader';
-import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
-import ParentProfileContent from '@/Component/admin/RightNavContent/ParentProfileContent';
+import React, { useEffect } from 'react';
+import ParentProfileContent from '@/Component/admin/RightNavContent/parents/ParentProfileContent';
 import { useRouter } from 'next/router';
+import { dispatch } from '@/redux/store';
+import { setHeader } from '@/redux/slices/HeaderTitle';
 
 const ParentProfile = () => {
-
-    const [collapsed, setCollapsed] = useState(false);
     const router = useRouter()
     const { id } = router.query
 
+    useEffect(() => {
+        dispatch(setHeader('Parent Profile'))
+    }, [])
+
     return (
-        <Layout style={{ minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
-            <AdminLeftNav collapsed={collapsed} />
-            <Layout className="site-layout" style={{ maxHeight: "100vh", overflow: 'scroll', overflowX: "hidden" }}>
-                <AdminHeader collapsed={collapsed} setCollapsed={setCollapsed} headerText="" />
-                <RightContentWrapper>
-                    <ParentProfileContent id={id} />
-                </RightContentWrapper>
-            </Layout>
-        </Layout>
+        <ParentProfileContent id={id} />
     );
 };
 export default ParentProfile;

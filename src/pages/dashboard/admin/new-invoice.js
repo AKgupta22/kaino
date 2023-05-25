@@ -1,25 +1,19 @@
-import { Layout } from 'antd';
-import React, { useState } from 'react';
-import AdminLeftNav from '@/Component/Generic/LeftNavbar/AdminLeftNav';
-import AdminHeader from '@/Component/Generic/Header/AdminHeader';
-import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
-import AdminNewInvoiceContent from '@/Component/admin/RightNavContent/AdminNewInvoiceContent';
+import React, { useEffect } from 'react';
+import AdminNewInvoiceContent from '@/Component/admin/RightNavContent/finance/AdminNewInvoiceContent';
+import { useRouter } from 'next/router';
+import { dispatch } from '@/redux/store';
+import { setHeader } from '@/redux/slices/HeaderTitle';
 
 const NewInvoice = () => {
+    const router = useRouter()
+    const { id } = router.query
 
-    const [collapsed, setCollapsed] = useState(false);
-
+    useEffect(() => {
+        dispatch(setHeader("New Invoice"))
+    }, [])
 
     return (
-        <Layout style={{ minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
-            <AdminLeftNav collapsed={collapsed} />
-            <Layout className="site-layout" style={{ maxHeight: "100vh", overflow: 'scroll', overflowX: "hidden" }}>
-                <AdminHeader collapsed={collapsed} setCollapsed={setCollapsed} headerText='New Invoice' />
-                <RightContentWrapper padding='12px'>
-                    <AdminNewInvoiceContent />
-                </RightContentWrapper>
-            </Layout>
-        </Layout>
+        <AdminNewInvoiceContent id={id} />
     );
 };
 export default NewInvoice;

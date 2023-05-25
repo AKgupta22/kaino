@@ -1,4 +1,5 @@
-import { Box, TextField, InputAdornment } from '@mui/material';
+import { kaino_plans } from '@/utils/constant';
+import { Box, TextField, InputAdornment, FormControl, Select, MenuItem } from '@mui/material';
 import { Table } from 'antd';
 import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
 import { BiCopy } from 'react-icons/bi';
@@ -13,12 +14,12 @@ const ItemsInvoiceTable = ({ data, setData }) => {
         newdata.push(
             {
                 id: newId,
-                item_name: '',
-                category: '',
-                qty: '',
+                item_name: 'Subscription',
+                plan: 'KAINO_PLUS',
+                quantity: 1,
                 price: '',
                 amount: '',
-                discount: '',
+                discount: 0,
             }
         )
         setData(newdata)
@@ -46,7 +47,7 @@ const ItemsInvoiceTable = ({ data, setData }) => {
         const value = e.target.value
         const copiedItems = { ...items }
         copiedItems[name] = parseInt(value) ? parseInt(value) : value
-        copiedItems.amount = copiedItems.price * copiedItems.qty
+        copiedItems.amount = copiedItems.price * copiedItems.quantity
 
         let newData = [...data]
         const index = newData.findIndex(item => item.id == copiedItems.id)
@@ -65,7 +66,6 @@ const ItemsInvoiceTable = ({ data, setData }) => {
                     size='small'
                     placeholder='Item Name'
                     variant="outlined"
-                    onChange={(e) => handleChange(e, item)}
                     name='item_name'
                     value={item.item_name}
                 />
@@ -74,17 +74,20 @@ const ItemsInvoiceTable = ({ data, setData }) => {
         {
             title: 'Category',
             render: (item) => (
-                <TextField
-                    sx={{ width: '100%', background: '#fff' }}
-                    focused
-                    required
-                    size='small'
-                    placeholder='Category Name'
-                    variant="outlined"
-                    onChange={(e) => handleChange(e, item)}
-                    name='category'
-                    value={item.category}
-                />
+                <FormControl focused fullWidth size='small'>
+                    <Select
+                        labelId="category_id"
+                        id="category"
+                        name='plan'
+                        value={item.plan}
+                        onChange={(e) => handleChange(e, item)}
+                        required
+                    >
+                        {
+                            kaino_plans.map(({ name, value }, i) => <MenuItem key={i} value={value}>{name}</MenuItem>)
+                        }
+                    </Select>
+                </FormControl>
             ),
         },
         {
@@ -98,8 +101,8 @@ const ItemsInvoiceTable = ({ data, setData }) => {
                     type='number'
                     variant="outlined"
                     onChange={(e) => handleChange(e, item)}
-                    name='qty'
-                    value={item.qty}
+                    name='quantity'
+                    value={item.quantity}
                 />
             ),
         },
@@ -109,7 +112,6 @@ const ItemsInvoiceTable = ({ data, setData }) => {
                 <TextField
                     sx={{ width: '100%', background: '#fff' }}
                     focused
-                    required
                     size='small'
                     type='number'
                     variant="outlined"
@@ -128,7 +130,6 @@ const ItemsInvoiceTable = ({ data, setData }) => {
                 <TextField
                     sx={{ width: '100%', background: '#fff' }}
                     focused
-                    required
                     size='small'
                     type='number'
                     variant="outlined"
@@ -147,7 +148,6 @@ const ItemsInvoiceTable = ({ data, setData }) => {
                 <TextField
                     sx={{ width: '100%', background: '#fff' }}
                     focused
-                    required
                     size='small'
                     type='number'
                     variant="outlined"

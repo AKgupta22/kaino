@@ -1,3 +1,4 @@
+import { getRole } from '@/utils/constant';
 import { Avatar, Table } from 'antd';
 import { useRouter } from 'next/router';
 
@@ -72,7 +73,7 @@ const StudentsList = ({ data }) => {
     const onRow = (record) => {
         return {
             onClick: () => {
-                router.push(`/dashboard/admin/student-profile/${record.user.id}`);
+                router.push(`/dashboard/${getRole() === 'Admin' ? 'admin' : 'school'}/student-profile/${record.user.id}`);
             },
         };
     };

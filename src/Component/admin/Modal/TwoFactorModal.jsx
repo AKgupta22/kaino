@@ -8,6 +8,8 @@ import { dispatch } from '@/redux/store'
 import * as yup from 'yup'
 import { useRouter } from 'next/router'
 import { verifyOtpRequest, verifyOtpReset } from '@/redux/slices/verifyOtp'
+import jwtDecode from 'jwt-decode'
+import { getRole } from '@/utils/constant'
 
 export default function TwoFactorModal({ setIsModal, isModal, data }) {
     const [errorText, setErrorText] = useState('')
@@ -43,7 +45,12 @@ export default function TwoFactorModal({ setIsModal, isModal, data }) {
             formik.resetForm()
             setIsModal(false)
             localStorage.setItem('token', verifyOtpState.data?.data?.access)
-            router.push('/dashboard/admin')
+            const decoded = jwtDecode(verifyOtpState.data?.data?.access)
+                const role = getRole(decoded?.role)
+                if (role === 'Admin')
+                    router.push('/dashboard/admin')
+                else if (role === 'School Admin')
+                    router.push('/dashboard/school')
             dispatch(verifyOtpReset())
         }
 

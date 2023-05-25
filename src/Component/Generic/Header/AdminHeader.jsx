@@ -11,15 +11,17 @@ const { Header } = Layout;
 import { dispatch } from '@/redux/store';
 import { getNotificationsRequest, getNotificationsReset } from '@/redux/slices/getNotifications';
 import { useSelector } from 'react-redux';
+import { setIsCollapsed } from '@/redux/slices/navbar';
 
-function AdminHeader({ collapsed, setCollapsed, headerText }) {
-
+function AdminHeader() {
+    const headerTitleState = useSelector(state => state.headerTitle)
     const {
         token: { colorBgContainer },
     } = theme.useToken();
 
     const [data, setData] = useState([])
     const getNotificationsState = useSelector(state => state.getNotifications)
+    const { isCollapsed } = useSelector(state => state.navbar)
     const [search, setSearch] = useState('')
     const [isNotification, setIsNotification] = useState(false)
     const [isUnread, setIsUnread] = useState(true)
@@ -81,13 +83,13 @@ function AdminHeader({ collapsed, setCollapsed, headerText }) {
                 className='menu_left_Header'
             >
                 <div className={styles.display_flex}>
-                    {React.createElement(collapsed ? AiOutlineMenuUnfold : HiOutlineMenuAlt2, {
+                    {React.createElement(isCollapsed ? AiOutlineMenuUnfold : HiOutlineMenuAlt2, {
                         className: 'trigger',
-                        onClick: () => setCollapsed(!collapsed),
+                        onClick: () => dispatch(setIsCollapsed()),
                         size: "2rem",
                         color: "#891b55"
                     })}
-                    <p className={styles.headerLeft_title}>{headerText}</p>
+                    <p className={styles.headerLeft_title}>{headerTitleState.title}</p>
                 </div>
                 <div className={styles.display_flex} style={{ marginLeft: "8px" }}>
                     <form onSubmit={handleSearch}>

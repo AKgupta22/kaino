@@ -1,18 +1,18 @@
 import { FaRegBuilding } from 'react-icons/fa'
 import { BsTerminal } from 'react-icons/bs'
-import { GoBook } from 'react-icons/go'
 import { Layout, Menu } from 'antd';
 import styles from '@/styles/adminNavbar.module.css'
 import { AiOutlineHome, AiOutlineLogout, AiOutlineSetting, AiOutlineUserAdd } from 'react-icons/ai';
 import { CgNotes } from 'react-icons/cg';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 const { Sider } = Layout;
 
-function AdminLeftNav({ collapsed }) {
+function AdminLeftNav() {
     const router = useRouter()
     const pathname = router.asPath.split('/dashboard/admin/')[1];
-
+    const { isCollapsed } = useSelector(state => state.navbar)
     const [defaultSelectedItem, setDefaultSelectedItem] = useState('1')
 
     useEffect(() => {
@@ -21,18 +21,17 @@ function AdminLeftNav({ collapsed }) {
                 setDefaultSelectedItem('2')
             else if (pathname === 'term-system')
                 setDefaultSelectedItem('3')
-            else if (pathname === 'manage-lessons')
-                setDefaultSelectedItem('4')
             else if (pathname === 'user-roles')
                 setDefaultSelectedItem('5')
             else if (pathname === 'finances')
                 setDefaultSelectedItem('6')
             else if (pathname === 'account-settings')
                 setDefaultSelectedItem('7')
+            else setDefaultSelectedItem('')
         }
         else
             setDefaultSelectedItem('1')
-    }, [])
+    }, [pathname])
 
     const handleChange = ({ key }) => {
         if (key === '1')
@@ -41,8 +40,6 @@ function AdminLeftNav({ collapsed }) {
             router.push('/dashboard/admin/create-school')
         else if (key === '3')
             router.push('/dashboard/admin/term-system')
-        else if (key === '4')
-            router.push('/dashboard/admin/manage-lessons')
         else if (key === '5')
             router.push('/dashboard/admin/user-roles')
         else if (key === '6')
@@ -56,7 +53,7 @@ function AdminLeftNav({ collapsed }) {
     }
 
     return (
-        <Sider trigger={null} collapsible collapsed={collapsed}
+        <Sider trigger={null} collapsible collapsed={isCollapsed}
             collapsedWidth={'85px'}
             width={'270px'}
             style={{ minHeight: '100%' }}
@@ -64,7 +61,7 @@ function AdminLeftNav({ collapsed }) {
         >
             <div className={styles.logo} >
                 {
-                    collapsed ? 'K' : 'KAINO'
+                    isCollapsed ? 'K' : 'KAINO'
                 }
             </div>
             <Menu
@@ -99,12 +96,6 @@ function AdminLeftNav({ collapsed }) {
                         icon: <BsTerminal size={"1.6rem"} />,
                         style: { width: "100%" },
                         label: 'Term System',
-                    },
-                    {
-                        key: '4',
-                        icon: <GoBook size={"1.6rem"} />,
-                        style: { width: "100%" },
-                        label: 'Lessons',
                     },
                     {
                         key: '5',

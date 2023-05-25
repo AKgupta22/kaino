@@ -9,9 +9,10 @@ import { loginRequest, loginReset } from '@/redux/slices/login'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { useSelector } from 'react-redux'
-import { loader_text } from '@/utils/constant'
+import { getRole, loader_text } from '@/utils/constant'
 import { useRouter } from 'next/router'
 import TwoFactorModal from '@/Component/admin/Modal/TwoFactorModal'
+import jwtDecode from 'jwt-decode'
 
 const login = () => {
 
@@ -52,7 +53,12 @@ const login = () => {
             }
             else {
                 localStorage.setItem('token', loginState.data?.data?.access)
-                router.push('/dashboard/admin')
+                const decoded = jwtDecode(loginState.data?.data?.access)
+                const role = getRole(decoded?.role)
+                if (role === 'Admin')
+                    router.push('/dashboard/admin')
+                else if (role === 'School Admin')
+                    router.push('/dashboard/school')
                 dispatch(loginReset())
             }
         }

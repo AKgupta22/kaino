@@ -1,25 +1,16 @@
-import { Layout } from 'antd';
-import React, { useState } from 'react';
-import AdminLeftNav from '@/Component/Generic/LeftNavbar/AdminLeftNav';
-import AdminHeader from '@/Component/Generic/Header/AdminHeader';
-import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
-import AdminAccountSettingsContent from '@/Component/admin/RightNavContent/AdminAccountSettingsContent';
+import React, { useEffect } from 'react';
+import AdminAccountSettingsContent from '@/Component/admin/RightNavContent/settings/AdminAccountSettingsContent';
+import { dispatch } from '@/redux/store';
+import { setHeader } from '@/redux/slices/HeaderTitle';
 
 const AccountSettings = () => {
 
-    const [collapsed, setCollapsed] = useState(false);
-
+    useEffect(() => {
+        dispatch(setHeader('Setting'))
+    }, [])
 
     return (
-        <Layout style={{ minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
-            <AdminLeftNav collapsed={collapsed} />
-            <Layout className="site-layout" style={{ maxHeight: "100vh", overflow: 'scroll', overflowX: "hidden" }}>
-                <AdminHeader collapsed={collapsed} setCollapsed={setCollapsed} headerText='School' />
-                <RightContentWrapper padding='18px'>
-                    <AdminAccountSettingsContent />
-                </RightContentWrapper>
-            </Layout>
-        </Layout>
+        <AdminAccountSettingsContent />
     );
 };
 export default AccountSettings;

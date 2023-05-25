@@ -3,6 +3,13 @@
     justify-content: space-between;
 }
 
+@media (max-width:540px) {
+    .invoicesBtn {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
 .invoicesBtn p {
     font-size: 1.3rem;
     font-weight: 600;
@@ -14,6 +21,26 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2rem;
+}
+
+@media (max-width:1300px) {
+    .finance_card_container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width:1060px) {
+    .finance_card_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:652px) {
+    .finance_card_container {
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+        column-gap: 0;
+    }
 }
 
 .finance_card {
@@ -51,6 +78,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width:1060px) {
+    .bottom_Pagination {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width:622px) {
+    .bottom_Pagination {
+        gap: 10px;
+    }
+}
+
+@media (max-width:796px) {
+    .chartCircleContainer {
+        grid-template-columns: 1fr;
+    }
 }
 
 .invoices_card {

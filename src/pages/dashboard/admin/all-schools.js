@@ -1,25 +1,16 @@
-import { Layout } from 'antd';
-import React, { useState } from 'react';
-import AdminLeftNav from '@/Component/Generic/LeftNavbar/AdminLeftNav';
-import AdminHeader from '@/Component/Generic/Header/AdminHeader';
-import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
-import AdminAllSchoolsContent from '@/Component/admin/RightNavContent/AdminAllSchoolsContent';
+import React, { useEffect } from 'react';
+import AdminAllSchoolsContent from '@/Component/admin/RightNavContent/schools/AdminAllSchoolsContent';
+import { dispatch } from '@/redux/store';
+import { setHeader } from '@/redux/slices/HeaderTitle';
 
 const AllSchools = () => {
 
-    const [collapsed, setCollapsed] = useState(false);
-
+    useEffect(() => {
+        dispatch(setHeader('Total Schools'))
+    }, [])
 
     return (
-        <Layout style={{ minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
-            <AdminLeftNav collapsed={collapsed} />
-            <Layout className="site-layout" style={{ maxHeight: "100vh", overflow: 'scroll', overflowX: "hidden" }}>
-                <AdminHeader collapsed={collapsed} setCollapsed={setCollapsed} headerText='Total Schools' />
-                <RightContentWrapper padding='12px'>
-                    <AdminAllSchoolsContent />
-                </RightContentWrapper>
-            </Layout>
-        </Layout>
+        <AdminAllSchoolsContent />
     );
 };
 export default AllSchools;
