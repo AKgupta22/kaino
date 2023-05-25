@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdminInvoiceViewContent from '@/Component/admin/RightNavContent/finance/AdminInvoiceViewContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const InvoiceView = () => {
     const router = useRouter()

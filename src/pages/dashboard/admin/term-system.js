@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AdminTermSystemContent from '@/Component/admin/RightNavContent/term-system/AdminTermSystemContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const TermSystem = () => {
 

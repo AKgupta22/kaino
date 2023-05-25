@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import { dispatch } from '@/redux/store';
 import SchoolRollCallContent from '@/Component/school/RightNavContent/roll-call/SchoolRollCallContent';
 

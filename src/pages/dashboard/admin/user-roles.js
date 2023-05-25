@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AdminUserRolesContent from '@/Component/admin/RightNavContent/user-roles/AdminUserRolesContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const UserRoles = () => {
 

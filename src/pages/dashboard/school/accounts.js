@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import SchoolAccountContent from '@/Component/school/RightNavContent/accounts/SchoolAccountContent';
 
 const Accounts = () => {

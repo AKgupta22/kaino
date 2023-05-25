@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import { dispatch } from '@/redux/store';
 import EditSchoolContent from '@/Component/school/RightNavContent/school-profile/EditSchoolContent';
 

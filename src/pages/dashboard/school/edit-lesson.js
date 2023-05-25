@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import SchoolEditLessonContent from '@/Component/school/RightNavContent/lessons/SchoolEditLessonContent';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import { dispatch } from '@/redux/store';
 
 const EditLesson = () => {

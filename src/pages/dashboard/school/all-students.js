@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import SchoolAllStudentsContent from '@/Component/school/RightNavContent/students/SchoolAllStudentsContent';
 import { useRouter } from 'next/router';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const AllStudents = () => {
     const router = useRouter()

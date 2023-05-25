@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdminTeacherByCountryContent from '@/Component/admin/RightNavContent/teachers/AdminTeacherByCountryContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const TeachersByCountry = () => {
     const router = useRouter()

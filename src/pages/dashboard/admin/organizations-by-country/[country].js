@@ -5,7 +5,7 @@ import AdminHeader from '@/Component/Generic/Header/AdminHeader';
 import RightContentWrapper from '@/Component/Generic/RightBarContent/RightContentWrapper';
 import { useRouter } from 'next/router';
 import AdminOrgnizationByCountryContent from '@/Component/admin/RightNavContent/orgnizations/AdminOrgnizationByCountryContent';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import { dispatch } from '@/redux/store';
 
 const OrgnizationsByCountry = () => {

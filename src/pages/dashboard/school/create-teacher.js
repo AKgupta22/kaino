@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SchoolCreateTeacherContent from '@/Component/school/RightNavContent/teachers/SchoolCreateTeacherContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const CreateTeacher = () => {
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import StudentProfileContent from '@/Component/admin/RightNavContent/students/StudentProfileContent';
 import { useRouter } from 'next/router';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 import { dispatch } from '@/redux/store';
 
 const StudentProfile = () => {

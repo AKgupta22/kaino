@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AdminAllTeachersContent from '@/Component/admin/RightNavContent/teachers/AdminAllTeachersContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const AllTeachers = () => {
 

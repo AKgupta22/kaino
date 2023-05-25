@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SchoolStudentCardContent from '@/Component/school/RightNavContent/students/SchoolStudentCardContent';
 import { dispatch } from '@/redux/store';
-import { setHeader } from '@/redux/slices/HeaderTitle';
+import { setHeader } from '@/redux/slices/setHeaderTitle';
 
 const StudentCard = () => {
 
